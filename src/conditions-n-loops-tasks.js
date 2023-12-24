@@ -21,8 +21,8 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  return number >= 0;
 }
 
 /**
@@ -38,8 +38,16 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+
+function getMaxNumber(...args) {
+  let result;
+  for (let i = 0; i < args.length; i += 1) {
+    if (result === undefined) {
+      result = args[i];
+    }
+    if (result < args[i]) result = args[i];
+  }
+  return result;
 }
 
 /**
@@ -60,8 +68,22 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(q, k) {
+  const arr = [];
+  for (let i = 0; i < 8; i += 1) {
+    arr.push({ x: q.x + i, y: q.y - i });
+    arr.push({ x: q.x - i, y: q.y - i });
+    arr.push({ x: q.x + i, y: q.y + i });
+    arr.push({ x: q.x - i, y: q.y + i });
+    arr.push({ x: q.x + i, y: q.y });
+    arr.push({ x: q.x - i, y: q.y });
+    arr.push({ x: q.x, y: q.y + i });
+    arr.push({ x: q.x, y: q.y - i });
+  }
+  for (let i = 0; i < arr.length; i += 1) {
+    if (arr[i].x === k.x && arr[i].y === k.y) return true;
+  }
+  return false;
 }
 
 /**
